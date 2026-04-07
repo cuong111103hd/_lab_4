@@ -22,6 +22,11 @@ export default function Home() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [sessionId] = useState(() => Math.random().toString(36).substring(2, 15));
+  const [tripSummary, setTripSummary] = useState({
+    flights: "",
+    hotels: "",
+    total_cost: "0đ"
+  });
   
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
@@ -55,6 +60,10 @@ export default function Home() {
       };
       
       setMessages((prev) => [...prev, agentMessage]);
+
+      if (data.trip_summary) {
+        setTripSummary(data.trip_summary);
+      }
     } catch (error) {
       console.error(error);
       setMessages((prev) => [
@@ -161,8 +170,8 @@ export default function Home() {
               <div className="flex items-center gap-2 mb-2 text-orange-700 font-semibold">
                 <Plane className="w-4 h-4" /> <h3>Chuyến Bay</h3>
               </div>
-              <p className="text-sm text-slate-500 leading-relaxed italic">
-                Chưa có chuyến bay nào được chọn. Hãy chat với TravelBuddy nhé!
+              <p className={`text-sm leading-relaxed ${tripSummary.flights ? 'text-slate-800 font-medium' : 'text-slate-500 italic'}`}>
+                {tripSummary.flights || "Chưa có chuyến bay nào được chọn. Hãy chat với TravelBuddy nhé!"}
               </p>
             </div>
             
@@ -170,15 +179,15 @@ export default function Home() {
               <div className="flex items-center gap-2 mb-2 text-cyan-700 font-semibold">
                 <span className="text-lg">🏨</span> <h3>Khách Sạn</h3>
               </div>
-              <p className="text-sm text-slate-500 leading-relaxed italic">
-                Chưa có khách sạn nào được chọn.
+              <p className={`text-sm leading-relaxed ${tripSummary.hotels ? 'text-slate-800 font-medium' : 'text-slate-500 italic'}`}>
+                {tripSummary.hotels || "Chưa có khách sạn nào được chọn."}
               </p>
             </div>
             
             <div className="pt-4 border-t border-slate-100">
               <div className="flex justify-between items-center bg-slate-900 text-white p-4 rounded-2xl shadow-md">
                 <span className="font-medium text-slate-300">Tổng chi phí</span>
-                <span className="text-xl font-bold">0đ</span>
+                <span className="text-xl font-bold">{tripSummary.total_cost || "0đ"}</span>
               </div>
             </div>
           </div>

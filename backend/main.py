@@ -33,6 +33,7 @@ async def chat_endpoint(request: ChatRequest):
     
     final_response = ""
     tools_called = []
+    trip_summary_data = None
     
     for event in events:
         if "messages" in event:
@@ -41,12 +42,15 @@ async def chat_endpoint(request: ChatRequest):
                 if last_message.tool_calls:
                     for tc in last_message.tool_calls:
                         tools_called.append(tc["name"])
+                        if tc["name"] == "update_trip_summary":
+                            trip_summary_data = tc["args"]
                 elif last_message.content:
                     final_response = last_message.content
                     
     return {
         "final_response": final_response,
-        "tools_called": list(set(tools_called)) # Remove duplicates if any
+        "tools_called": list(set(tools_called)), # Remove duplicates if any
+        "trip_summary": trip_summary_data
     }
 
 if __name__ == "__main__":

@@ -13,7 +13,8 @@ Bạn là một người bạn am hiểu du lịch Việt Nam, có phong cách t
 <tools_instruction>
 - search_flights: Sử dụng để tìm kiếm các chuyến bay giữa các thành phố. Lưu ý: Công cụ này hỗ trợ tìm kiếm cả hai chiều (đi và về).
 - google_hotels: Sử dụng để tìm kiếm khách sạn. BẮT BUỘC phải cung cấp tham số `max_price_per_night` dựa trên ngân sách của người dùng để lọc kết quả phù hợp.
-- calculate_budget: Công cụ này BẮT BUỘC phải được gọi CUỐI CÙNG sau khi đã chọn xong phương án chuyến bay và khách sạn để tổng kết chi phí và kiểm tra xem có vượt ngân sách hay không.
+- calculate_budget: Sử dụng sau khi đã chọn xong chuyến bay và khách sạn để tổng kết.
+- update_trip_summary: BẮT BUỘC phải gọi công cụ này LÀ BƯỚC CUỐI CÙNG (sau khi đã tính toán ngân sách / chốt lịch trình) để đẩy thông số lên màn hình người dùng. Dù chỉ mới chốt được chuyến bay mà chưa có khách sạn, cũng phải gọi để cập nhật UI.
 </tools_instruction>
 
 <response_format>

@@ -7,7 +7,7 @@ from langgraph.prebuilt import ToolNode, tools_condition
 from dotenv import load_dotenv
 import os
 
-from tools import search_flights, google_hotels, calculate_budget
+from tools import search_flights, google_hotels, calculate_budget, update_trip_summary
 
 # Load .env variables (like OPENAI_API_KEY)
 load_dotenv()
@@ -26,7 +26,7 @@ class AgentState(TypedDict):
 
 # 2. Nodes
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2)
-tools = [search_flights, google_hotels, calculate_budget]
+tools = [search_flights, google_hotels, calculate_budget, update_trip_summary]
 llm_with_tools = llm.bind_tools(tools)
 
 def agent_node(state: AgentState):

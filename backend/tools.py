@@ -94,3 +94,14 @@ def calculate_budget(total_budget: int, expenses: str) -> Dict:
         "status": status,
         "details": detailed_expenses
     }
+
+@tool
+def update_trip_summary(flights: str, hotels: str, total_cost: str) -> str:
+    """
+    BẮT BUỘC gọi công cụ này để cập nhật hoặc chốt lại Lịch trình chuyến đi (Trip Summary) hiển thị trên màn hình người dùng.
+    Tham số:
+    - flights: Tên chuyến bay, giá (VD: "VietJet - 890.000đ"). Nếu chưa chọn, để trống.
+    - hotels: Tên khách sạn và giá (VD: "Sala Danang (1.200.000đ)"). Nếu chưa chọn, để trống.
+    - total_cost: Tổng chi phí ước tính (VD: "2.090.000đ").
+    """
+    return "Đã đưa luồng dữ liệu Trip Summary lên giao diện người dùng."
